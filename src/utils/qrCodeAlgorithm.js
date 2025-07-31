@@ -145,6 +145,25 @@ function encodeByte(text) {
     return binary;
 }
 
+function addPadding(dataBits, dataCapacity) {
+    // Fill with the 0th until a full byte
+    const remainingBits = 8 - (dataBits.length % 8);
+    if (remainingBits < 8) {
+        dataBits += '0'.repeat(remainingBits);
+    }
+
+    // Fill with alternating Padding-Bytes (17, 236)
+    const paddingBytes = ['11101100', '00010001'];
+    let paddingIndex = 0;
+
+    while (dataBits.length < dataCapacity) {
+        dataBits += paddingBytes[paddingIndex];
+        paddingIndex = (paddingIndex + 1) % 2;
+    }
+
+    return dataBits;
+}
+
 
 //Generation of the QR Code
 export function generateQRCode(text) {
