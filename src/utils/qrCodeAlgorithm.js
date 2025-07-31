@@ -115,6 +115,10 @@ function getAlphanumericValue(char) {
     }
 }
 
+function toBinary(num, length) {
+    return num.toString(2).padStart(length, '0');
+}
+
 //Generation of the QR Code
 export function generateQRCode(text) {
     let matrix = createEmptyMatrix();
