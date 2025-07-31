@@ -164,6 +164,32 @@ function addPadding(dataBits, dataCapacity) {
     return dataBits;
 }
 
+export function encodeData(text) {
+    let mod;
+    let encodedData;
+
+    if (isAlphanumeric(text)) {
+        mode = MODE.ALPHANUMERIC;
+        encodedData = encodeAlphanumeric(text);
+    } else {
+        mode = MODE.BYTE;
+        encodedData = encodeByte(text);
+    }
+
+    let dataBits = mod;
+
+    const charCountBits = mod === MODE.ALPHANUMERIC ? CHARACTER_COUNT_BITS.ALPHANUMERIC : CHARACTER_COUNT_BITS.BYTE;
+
+    dataBits += toBinary(text.length, charCountBits);
+
+    dataBits += encodedData;
+
+    const dataCapacity = 440; // 55 Bytes
+
+    dataBits = addPadding(dataBits, dataCapacity);
+
+    return dataBits;
+}
 
 //Generation of the QR Code
 export function generateQRCode(text) {
