@@ -98,6 +98,22 @@ function isAlphanumeric(text) {
     return alphanumericRegex.test(text);
 }
 
+function getAlphanumericValue(char) {
+    if (char >= '0' && char <= '9') return char.charCodeAt(0) - 48;
+    if (char >= 'A' && char <= 'Z') return char.charCodeAt(0) - 55;
+    switch (char) {
+        case ' ': return 36;
+        case '$': return 37;
+        case '%': return 38;
+        case '*': return 39;
+        case '+': return 40;
+        case '-': return 41;
+        case '.': return 42;
+        case '/': return 43;
+        case ':': return 44;
+        default: return -1;
+    }
+}
 
 //Generation of the QR Code
 export function generateQRCode(text) {
