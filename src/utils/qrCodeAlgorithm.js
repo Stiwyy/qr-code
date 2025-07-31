@@ -93,6 +93,10 @@ const CHARACTER_COUNT_BITS = {
     KANJI: 8
 };
 
+function isAlphanumeric(text) {
+    const alphanumericRegex = /^[0-9A-Z $%*+\-./:]*$/;
+    return alphanumericRegex.test(text);
+}
 
 
 //Generation of the QR Code
