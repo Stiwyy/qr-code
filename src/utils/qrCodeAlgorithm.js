@@ -22,6 +22,7 @@ const ALIGNMENT_PATTERN = [
 
 const ALIGNMENT_POSITION = [22];
 
+// Functions to create and add Static patterns
 function createTimingPattern(size) {
     const pattern = new Array(size).fill(0);
     for (let i = 0; i < size; i += 2) {
@@ -44,3 +45,15 @@ function addFinderPatterns(matrix) {
     }
     return matrix;
 }
+
+function addSeparators(matrix) {
+    for (let y = 0; y < 8; y++) {
+        for (let x = 0; x < 8; x++) {
+            if (y === 7 || x === 7) matrix[y][x] = 0;
+            if (y === 7 || x === 0) matrix[y][matrix.length - 8 + x] = 0;
+            if (y === 0 || x === 7) matrix[matrix.length - 8 + y][x] = 0;
+        }
+    }
+    return matrix;
+}
+
