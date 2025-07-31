@@ -57,3 +57,11 @@ function addSeparators(matrix) {
     return matrix;
 }
 
+function addTimingPatterns(matrix) {
+    const timing = createTimingPattern(matrix.length - 16);
+    for (let i = 0; i < timing.length; i++) {
+        matrix[6][i + 8] = timing[i];
+        matrix[i + 8][6] = timing[i];
+    }
+    return matrix;
+}
