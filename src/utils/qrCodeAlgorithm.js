@@ -77,9 +77,25 @@ function addAlignmentPattern(matrix) {
     return matrix;
 }
 
+// Mode Indicator for QR-Code
+const MODE = {
+    NUMERIC: '0001',
+    ALPHANUMERIC: '0010',
+    BYTE: '0100',
+    KANJI: '1000'
+};
+
+// For Version 3 medium error correction
+const CHARACTER_COUNT_BITS = {
+    NUMERIC: 10,
+    ALPHANUMERIC: 9,
+    BYTE: 8,
+    KANJI: 8
+};
+
+
 
 //Generation of the QR Code
-// TODO: Add text converter.
 export function generateQRCode(text) {
     let matrix = createEmptyMatrix();
     matrix = addFinderPatterns(matrix);
