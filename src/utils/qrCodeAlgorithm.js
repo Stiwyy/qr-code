@@ -165,7 +165,7 @@ function addPadding(dataBits, dataCapacity) {
 }
 
 export function encodeData(text) {
-    let mod;
+    let mode;
     let encodedData;
 
     if (isAlphanumeric(text)) {
@@ -176,9 +176,9 @@ export function encodeData(text) {
         encodedData = encodeByte(text);
     }
 
-    let dataBits = mod;
+    let dataBits = mode;
 
-    const charCountBits = mod === MODE.ALPHANUMERIC ? CHARACTER_COUNT_BITS.ALPHANUMERIC : CHARACTER_COUNT_BITS.BYTE;
+    const charCountBits = mode === MODE.ALPHANUMERIC ? CHARACTER_COUNT_BITS.ALPHANUMERIC : CHARACTER_COUNT_BITS.BYTE;
 
     dataBits += toBinary(text.length, charCountBits);
 
