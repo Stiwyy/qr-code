@@ -76,3 +76,14 @@ function addAlignmentPattern(matrix) {
     }
     return matrix;
 }
+
+
+//Generation of the QR Code
+export function generateQRCode() {
+    let matrix = createEmptyMatrix();
+    matrix = addFinderPatterns(matrix);
+    matrix = addSeparators(matrix);
+    matrix = addTimingPatterns(matrix);
+    matrix = addAlignmentPattern(matrix);
+    return matrix;
+}
