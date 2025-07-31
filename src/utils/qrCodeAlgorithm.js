@@ -191,6 +191,15 @@ export function encodeData(text) {
     return dataBits;
 }
 
+export function bitsToBytes(bits) {
+    const bytes = [];
+    for (let i = 0; i < bits.length; i+=8) {
+        bytes.push(parseInt(bits.substr(i, 8), 2));
+    }
+    return bytes;
+}
+
+
 //Generation of the QR Code
 export function generateQRCode(text) {
     let matrix = createEmptyMatrix();
