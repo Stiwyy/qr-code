@@ -19,3 +19,11 @@ const ALIGNMENT_PATTERN = [
 ];
 
 const ALIGNMENT_POSITION = [22];
+
+function createTimingPattern(size) {
+    const pattern = new Array(size).fill(0);
+    for (let i = 0; i < size; i += 2) {
+        pattern[i] = 1;
+    }
+    return pattern;
+}
