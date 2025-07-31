@@ -135,6 +135,17 @@ function encodeAlphanumeric(text) {
     return binary;
 }
 
+
+// Encode Text in Byte Mode (UTF-8)
+function encodeByte(text) {
+    let binary = '';
+    for (let i = 0; i < text.length; i++) {
+        binary += toBinary(text.charCodeAt(i), 8);
+    }
+    return binary;
+}
+
+
 //Generation of the QR Code
 export function generateQRCode(text) {
     let matrix = createEmptyMatrix();
