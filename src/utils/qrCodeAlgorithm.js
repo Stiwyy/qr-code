@@ -79,11 +79,35 @@ function addAlignmentPattern(matrix) {
 
 
 //Generation of the QR Code
-export function generateQRCode() {
+// TODO: Add text converter.
+export function generateQRCode(text) {
     let matrix = createEmptyMatrix();
     matrix = addFinderPatterns(matrix);
     matrix = addSeparators(matrix);
     matrix = addTimingPatterns(matrix);
     matrix = addAlignmentPattern(matrix);
     return matrix;
+}
+
+
+export function renderQRCodeToCanvas(matrix, canvasRef, moduleSize = 10) {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const size = matrix.length * moduleSize;
+    canvas.width = size;
+    canvas.height = size;
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, size, size);
+    for (let y = 0; y < matrix.length; y++) {
+        for (let x = 0; x < matrix.length; x++) {
+            if (matrix[y][x] === 1) {
+                ctx.fillStyle = 'black';
+                ctx.fillRect(x * moduleSize, y * moduleSize, moduleSize, moduleSize);
+            } else if (matrix[y][x] === 0) {
+                ctx.fillStyle = 'white';
+                ctx.fillRect(x * moduleSize, y * moduleSize, moduleSize, moduleSize);
+            }
+        }
+    }
 }
