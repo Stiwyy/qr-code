@@ -200,6 +200,47 @@ export function bitsToBytes(bits) {
 }
 
 
+function placeBitsInMatrix(matrix, bitString) {
+    let bitIndex = 0;
+
+    for (let col = matrix.length - 1; col >= 0; col -= 2){
+        if (col===6) col--;
+
+        const upward = (col / 2) % 2 === 0;
+
+        let row = upward ? matrix.length - 1 : 0;
+
+        const rowStep = upward ? -1 : 1;
+
+        for (let i = 0; i < 2; i++){
+            const currentCol = col -i;
+            if (currentCol < 0) break;
+
+            while (upward ? row >= 0 : row < matrix.length) {
+                if (matrix[row][currentCol] === null){
+                    if (bitIndex < bitString.length) {
+                        matrix[row][currentCol] = parseInt(bitString[bitIndex]);
+                        bitIndex++;
+                    } else {
+                        matrix[row][currentCol] = 0;
+                    }
+                }
+                row += rowStep;
+            }
+            row = upward ? 0 : matrix.length -1;
+        }
+
+    }
+
+    for (let row = 0; row < matrix.length; row++) {
+        for (let col = 0; col < matrix.length; col++) {
+            if (matrix[row][col] === null) {
+                matrix[row][col] = 0;
+            }
+        }
+    }
+}
+
 //Generation of the QR Code
 export function generateQRCode(text) {
     let matrix = createEmptyMatrix();
@@ -209,6 +250,8 @@ export function generateQRCode(text) {
     matrix = addAlignmentPattern(matrix);
     const encodedData = encodeData(text);
     const dataBytes = bitsToBytes(encodedData);
+
+    placeBitsInMatrix(matrix, encodedData)
 
     return matrix;
 }
