@@ -65,3 +65,14 @@ function addTimingPatterns(matrix) {
     }
     return matrix;
 }
+
+function addAlignmentPattern(matrix) {
+    const pos = ALIGNMENT_POSITION[0];
+    const start = pos - 2;
+    for (let y = 0; y < 5; y++) {
+        for (let x = 0; x < 5; x++) {
+            matrix[start + y][start + x] = ALIGNMENT_PATTERN[y][x];
+        }
+    }
+    return matrix;
+}
