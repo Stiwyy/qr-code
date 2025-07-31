@@ -207,7 +207,8 @@ export function generateQRCode(text) {
     matrix = addSeparators(matrix);
     matrix = addTimingPatterns(matrix);
     matrix = addAlignmentPattern(matrix);
-    return matrix;
+    const encodedData = encodeData(text);
+    const dataBytes = bitsToBytes(encodedData);
 }
 
 
