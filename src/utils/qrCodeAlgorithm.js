@@ -119,6 +119,22 @@ function toBinary(num, length) {
     return num.toString(2).padStart(length, '0');
 }
 
+// Encode Text in Alphanumeric mode
+function encodeAlphanumeric(text) {
+    let binary = '';
+    for (let i = 0; i < text.length; i += 2) {
+        if (i + 1 < text.length) {
+            const val1 = getAlphanumericValue(text[i]);
+            const val2 = getAlphanumericValue(text[i + 1]);
+            binary += toBinary(val1 * 45 + val2, 11);
+        } else {
+            const val = getAlphanumericValue(text[i]);
+            binary += toBinary(val, 6);
+        }
+    }
+    return binary;
+}
+
 //Generation of the QR Code
 export function generateQRCode(text) {
     let matrix = createEmptyMatrix();
