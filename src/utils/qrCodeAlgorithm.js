@@ -27,3 +27,8 @@ function createTimingPattern(size) {
     }
     return pattern;
 }
+
+function createEmptyMatrix() {
+    return new Array(29).fill().map(() => new Array(29).fill(null));
+}
+
